@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Router, ActivatedRoute, ParamMap} from '@angular/router';
 import { User } from 'src/app/shared/models/user';
+import { SessionServiceService } from 'src/app/shared/services/session-service.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import Swal from 'sweetalert2'
 
@@ -12,14 +13,9 @@ import Swal from 'sweetalert2'
 })
 export class LoginComponent implements OnInit {
 
-  public imageURL: string;
   emailPattern:any = /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/;
 
-  constructor(private userSvc: UserService, private router: Router) {
-
-    this.imageURL="https://cuanticaconsulting.com/wp-content/uploads/2018/12/Cuantica-Consulting-Mundo-3C-Continuo-Cambio-Creativo-Large-1080x675.jpeg"
-
-  }
+  constructor(private userSvc: UserService, private sesion:SessionServiceService, private router: Router) {}
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.minLength(5), Validators.pattern(this.emailPattern)]),
@@ -29,17 +25,26 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get email(){
+    return this.loginForm.get('email');
+  }
+
+  get pass(){
+    return this.loginForm.get('pass');
+  }
+
   onLogin(user:User){
 
     if(this.loginForm.valid){
 
-
-      if(this.userSvc.onLogin(user)){
-
-        this.loginForm.reset();
-        this.router.navigate(['/map']);
-
-      }else if(!this.userSvc.onLogin(user)){
+      this.userSvc.onLogin(user).subscribe((res: any) => {
+        console.log(res)
+        if (res.data.ok) {
+          this.sesion.agregarSesion('token', res.data.token)
+          this.userSvc.dataUser = res.data
+          this.loginForm.reset();
+          this.router.navigate(['/map2']);
+        } else {
           Swal.fire({
             title: 'Ingreso inválido',
             html:
@@ -51,21 +56,13 @@ export class LoginComponent implements OnInit {
             confirmButtonText: 'Ok',
             width:'25%',
             heightAuto:true
-                   });
-      }
-
+          });
+        };
+      })
     }else{
       console.log('No valid');
     }
 
-  }
-
-  get email(){
-    return this.loginForm.get('email');
-  }
-
-  get pass(){
-    return this.loginForm.get('pass');
   }
 
 }

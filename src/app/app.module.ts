@@ -6,15 +6,14 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-/* import { GoogleMapsModule } from "@angular/google-maps"; */
-/* import { AgmCoreModule } from '@agm/core';
-"@angular/google-maps": "^12.0.5"
-"@agm/core": "^3.0.0-beta.0"
-"@types/googlemaps": "^3.39.13" */
+import { HttpClientModule } from '@angular/common/http';
+import { Map2Component } from './components/map2/map2.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    Map2Component
   ],
   imports: [
     BrowserModule,
@@ -23,10 +22,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    /* GoogleMapsModule, */
-   /*  AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDpV2SN0k5BqyVTQjTX8wU - hdCgBgktKY0'
-    }) */
+    HttpClientModule,
   ],
    schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [],
