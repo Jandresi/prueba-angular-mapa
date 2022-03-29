@@ -7,13 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
-import { Map2Component } from './components/map2/map2.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    Map2Component
   ],
   imports: [
     BrowserModule,
