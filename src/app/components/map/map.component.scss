@@ -1,0 +1,25 @@
+.navbar {
+  position: absolute;
+  background: #08206c !important;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  display: block;
+  img {
+    width: 80%;
+  }
+}
+
+.map {
+  height: 91%;
+  top: 9%;
+  padding: 0;
+  position: relative;
+}

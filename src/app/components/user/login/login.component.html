@@ -1,0 +1,51 @@
+<div class="container">
+   <header>
+    <h1>
+      SOLFIX <br><br><br>
+      SMART <br><br><br>
+      CITY
+    </h1>
+  </header>
+
+      <mat-card>
+        <mat-card-title>Bienvenido</mat-card-title>
+        <mat-card-content>
+          <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)">
+
+            <div class="input">
+              <p>
+                <mat-form-field>
+                  <input type="text" matInput placeholder="Username" formControlName="email"/>
+                  <mat-error class="alert-danger" *ngIf="email.invalid && (email.dirty || email.touched )">
+                    <mat-error *ngIf="email.errors.required" class="container-error-message">
+                      This field is required
+                    </mat-error>
+                    <mat-error *ngIf="email.errors.minlength" class="container-error-message">
+                      5 characters min
+                    </mat-error>
+                    <mat-error *ngIf="email.dirty && email.invalid && email.errors.pattern"  class="container-error-message">
+                      Invalid email
+                    </mat-error>
+                  </mat-error>
+                </mat-form-field>
+              </p>
+            </div>
+
+            <div class="input">
+              <p>
+                <mat-form-field>
+                  <input type="password" matInput placeholder="Password" formControlName="pass" />
+                  <mat-error class="alert-danger" *ngIf="pass.invalid && (pass.dirty || pass.touched )">
+                    <mat-error *ngIf="pass.errors.required" class="container-error-message">
+                      This field is required
+                    </mat-error>
+                  </mat-error>
+                </mat-form-field>
+              </p>
+            </div>
+            <button class="button" type="submit" [disabled]="!loginForm.valid" mat-raised-button color="primary">INICIAR</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+</div>

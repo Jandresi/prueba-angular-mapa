@@ -1,0 +1,13 @@
+ <mat-toolbar color="primary" class="navbar">
+
+     <a routerLink="/" color="primary" (onlick)="opened=!opened">
+          <img src="../../../assets/images/LOGO-SOLFIXAIR.png" alt="logo">
+     </a>
+     <span>MAPA</span>
+     <span>Usuario: Silva</span>
+
+</mat-toolbar>
+
+<div class="map" leaflet [leafletOptions]="options"></div>
+
+
